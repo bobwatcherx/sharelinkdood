@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perbaikan Kata</title>
+    <!-- Tambahkan pustaka Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style >
+       a{
+        color:white;
+        font-weight: bold;
+       }
+   </style>
+   
+</head>
+<body style="background-color: brown;color:white">
+
+
+    <div class="container mt-5">
+        <div class="row justify-content-between">
+            <div class="col-auto">
+                <a class="btn btn-secondary" href="index.html">Generated Link</a>
+            </div>
+            <div class="col-auto">
+                <a class="btn btn-secondary" href="https://bobwatcherx-scraperdood.hf.space/">Scraping</a>
+            </div>
+            <div class="col-auto">
+                <a class="btn btn-secondary" href="https://caridood.vercel.app/">CARI BOKEP TELE</a>
+            </div>
+             <div class="col-auto">
+                <a class="btn btn-secondary" href="https://caribokep.vercel.app/">Cari bokep</a>
+            </div>
+            <div class="col-auto">
+                <a class="btn btn-secondary" href="perbaikan.html">Ekstrak F</a>
+            </div>
+        </div>
+        <h1 class="mt-4">Perbaikan Kata</h1>
+        <div class="form-group">
+            <textarea class="form-control" id="inputText" rows="5" cols="50"></textarea>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" id="replaceText" placeholder="Teks yang akan diganti">
+        </div>
+        <div class="form-group">
+            <input class="form-control" value="https://doods.pro"type="text" id="replacementText" placeholder="Teks pengganti">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="replaceUrls()">Perbaiki</button>
+            <button class="btn btn-success" onclick="copyToClipboard()">Copy</button>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" id="outputText" rows="5" cols="50" readonly></textarea>
+        </div>
+    </div>
+
+    <!-- Tambahkan pustaka Bootstrap JavaScript dan jQuery (jika diperlukan) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function replaceUrls() {
+            const inputText = document.getElementById("inputText").value;
+            const replaceText = document.getElementById("replaceText").value;
+            const replacementText = document.getElementById("replacementText").value;
+            const regex = new RegExp(replaceText, 'g');
+            const replacedText = inputText.replace(regex, replacementText);
+
+            document.getElementById("outputText").value = replacedText;
+        }
+
+        function copyToClipboard() {
+            const outputText = document.getElementById("outputText");
+            outputText.select();
+            document.execCommand("copy");
+        }
+    </script>
+</body>
+</html>

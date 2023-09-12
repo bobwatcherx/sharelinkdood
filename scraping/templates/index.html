@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrape Website</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="https://scrapingdood.vercel.app/">Scrape Website</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://sharelinkdood.vercel.app/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://scrapingdood.vercel.app/">Scraping</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://sharelinkdood.vercel.app/perbaikan.html">Perbaikan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Scrape Website</h1>
+        <p>Masukkan URL situs web:</p>
+        <div class="input-group mb-3">
+            <input type="text" id="webUrl" class="form-control">
+            <button class="btn btn-primary" onclick="scrapeWebsite()">Scrape</button>
+        </div>
+        <p>Hasil:</p>
+        <div id="result"></div>
+       
+    </div>
+
+    <!-- Tambahkan pustaka JavaScript Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        function scrapeWebsite() {
+            const webUrl = document.getElementById('webUrl').value;
+
+            // Buat permintaan HTTP dengan fetch
+            fetch(`/scrape?url=${encodeURIComponent(webUrl)}`)
+                .then(response => response.text())
+                .then(data => {
+                    const resultElement = document.getElementById('result');
+                    resultElement.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Gagal mengunduh sumber kode HTML:', error);
+                    const resultElement = document.getElementById('result');
+                    resultElement.innerHTML = 'Gagal mengunduh sumber kode HTML';
+                });
+        }
+
+        
+    </script>
+</body>
+</html>
