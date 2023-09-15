@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Input</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body style="background-color: brown;color: white;">
 
+    <a href ="https://sharelinkdood.vercel.app"
+    style="font-size: 30px;color: white;"
+    >
+        Kembali Ke Home
+
+    </a>
     <div class="container" style="margin-top: 30px;">
          <form action="#" method="post">
         
@@ -26,10 +31,12 @@
 
         <label for="link_tonton">Link Tonton:</label>
         <input type="text" id="link_tonton" name="link_tonton">
+        <button type="button" onclick="previewLink('link_tonton')">Preview link tonton</button>
         <br><br>
 
         <label for="link_download">Link Download:</label>
         <input type="text" id="link_download" name="link_download">
+        <button type="button" onclick="previewLink('link_download')">Preview link download</button>
         <br><br>
 
         <label for="daftar_pemain">Daftar Pemain:</label>
@@ -82,7 +89,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-     <script>
+    <script>
         function copyAll() {
             var combinedText = "";
 
@@ -104,6 +111,15 @@
             alert("Semua hasil telah disalin!");
         }
 
+        function previewLink(linkType) {
+            var linkValue = document.getElementById(linkType).value;
+            if (linkType === 'link_tonton') {
+                window.open(linkValue, '_blank');
+            } else if (linkType === 'link_download') {
+                window.open(linkValue, '_blank');
+            }
+        }
+
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
             document.getElementById('hasil_image').innerText = document.getElementById('image').value;
@@ -114,7 +130,6 @@
             document.getElementById('hasil_daftar_pemain').innerText =  " 👸 Daftar pemain : \n" + document.getElementById('daftar_pemain').value;
         });
     </script>
-
 
 </body>
 </html>
