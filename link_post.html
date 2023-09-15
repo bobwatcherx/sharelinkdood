@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <div class="container" style="margin-top: 30px;">
+         <form action="#" method="post">
+        
+        <label for="image">ViDEO:</label>
+        <textarea id="image" name="image" rows="4" cols="50"></textarea>
+        <br><br>
+
+        <label for="photo">Photo:</label>
+        <textarea id="photo" name="photo" rows="4" cols="50"></textarea>
+        <br><br>
+
+        <label for="code">Code:</label>
+        <input type="text" id="code" name="code">
+        <br><br>
+
+        <label for="link_tonton">Link Tonton:</label>
+        <input type="text" id="link_tonton" name="link_tonton">
+        <br><br>
+
+        <label for="link_download">Link Download:</label>
+        <input type="text" id="link_download" name="link_download">
+        <br><br>
+
+        <label for="daftar_pemain">Daftar Pemain:</label>
+        <input type="text" id="daftar_pemain" name="daftar_pemain">
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    </div>
+    
+
+<!-- REWSULT -->
+<div class="container mt-2">
+    <h2>Hasil Input:</h2>
+       <button class="btn btn-primary" onclick="copyAll()">Copy All</button>
+    
+    <div>
+        <div id="hasil_image"></div>
+    </div>
+    <br/>
+    <div>
+        <div id="hasil_photo"></div>
+    </div>
+    <br/>
+
+    <div>
+        <div id="hasil_link_tonton"></div>
+    </div>
+    <br/>
+    <br/>
+
+    <div>
+        <div id="hasil_link_download"></div>
+    </div>
+    <br/>
+    <br/>
+
+    <div>
+        <div id="hasil_code"></div>
+    </div>
+    <br/>
+
+    <div>
+        <div id="hasil_daftar_pemain"></div>
+    </div>
+</div>
+
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+     <script>
+        function copyAll() {
+            var combinedText = "";
+
+            combinedText += document.getElementById('image').value + "\n\n";
+            combinedText += document.getElementById('photo').value + "\n\n";
+
+            combinedText += "💡 Code :  " + document.getElementById('code').value + "\n\n";
+            combinedText += "😍 " + document.getElementById('link_tonton').value + "\n\n";
+            combinedText += "🤩 " + document.getElementById('link_download').value + "\n\n";
+            combinedText += "👸 Daftar pemain : \n\n" + document.getElementById('daftar_pemain').value;
+
+            var tempTextArea = document.createElement('textarea');
+            tempTextArea.value = combinedText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            alert("Semua hasil telah disalin!");
+        }
+
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('hasil_image').innerText = document.getElementById('image').value;
+            document.getElementById('hasil_photo').innerText = document.getElementById('photo').value;
+            document.getElementById('hasil_code').innerText = "💡 Code :  " +document.getElementById('code').value;
+            document.getElementById('hasil_link_tonton').innerText = "😍 Link tonton : " + document.getElementById('link_tonton').value;
+            document.getElementById('hasil_link_download').innerText = "🤩 Link Download : " +document.getElementById('link_download').value;
+            document.getElementById('hasil_daftar_pemain').innerText =  " 👸 Daftar pemain : \n" + document.getElementById('daftar_pemain').value;
+        });
+    </script>
+
+
+</body>
+</html>
