@@ -14,12 +14,16 @@ function generateLink() {
             let links = '';
 
             files.forEach((file, index) => {
-                const title = file.title
-                const sub = file.title.replace(/\s+/g, '_');
+                const title = file.title;
+                const sub = file.title.replace(/[\/\s]/g, ' '); // Menghapus karakter '/' dan spasi
                 const file_code = file.file_code;
                 const link = `https://bangbuncit.netlify.app/player/${file_code}/${sub}`;
-                links += `${title}\n<br>${link}\n<br><br>`; // Menggunakan \n untuk baris baru
+                links += `${title}\n<br>${link}\n<br><br>`;
             });
+
+
+
+
 
             resultDiv.innerHTML = links; // Menggunakan innerHTML untuk memperhitungkan baris baru
 

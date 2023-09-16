@@ -40,7 +40,7 @@
         <br><br>
 
         <label for="daftar_pemain">Daftar Pemain:</label>
-        <input type="text" id="daftar_pemain" name="daftar_pemain">
+        <textarea id="daftar_pemain" name="image" rows="4" cols="50"></textarea>
         <br><br>
 
         <input type="submit" value="Submit">
@@ -97,9 +97,11 @@
             combinedText += document.getElementById('photo').value + "\n\n";
 
             combinedText += "💡 Code :  " + document.getElementById('code').value + "\n\n";
-            combinedText += "😍 " + document.getElementById('link_tonton').value + "\n\n";
-            combinedText += "🤩 " + document.getElementById('link_download').value + "\n\n";
-            combinedText += "👸 Daftar pemain : \n\n" + document.getElementById('daftar_pemain').value;
+            combinedText += "😍 Link Nonton : " + document.getElementById('link_tonton').value + "\n\n";
+            combinedText += "🤩 Link Download : " + document.getElementById('link_download').value + "\n\n";
+            combinedText += "👸 Daftar pemain : \n" + document.getElementById('daftar_pemain').value + "\n\n";
+
+            combinedText += "Yang Mau REQUEST Bokep . CHAT Gw"
 
             var tempTextArea = document.createElement('textarea');
             tempTextArea.value = combinedText;
