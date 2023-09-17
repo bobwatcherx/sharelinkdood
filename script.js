@@ -15,7 +15,7 @@ function generateLink() {
 
             files.forEach((file, index) => {
                 const title = file.title;
-                const sub = file.title.replace(/[\/\s]/g, ' '); // Menghapus karakter '/' dan spasi
+                const sub = file.title.replace(/[\/\s]/g, '_'); // Menghapus karakter '/' dan spasi
                 const file_code = file.file_code;
                 const link = `https://bangbuncit.netlify.app/player/${file_code}/${sub}`;
                 links += `${title}\n<br>${link}\n<br><br>`;
