@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 # URL situs web yang akan di-scrape
 url = "https://javopen.co"
@@ -17,28 +18,32 @@ if response.status_code == 200:
     target_div2 = soup.find('div', id='pagebuilder-9428')  # Tambahkan ini
     target_div3 = soup.find('div', id='pagebuilder-7120')   # Tambahkan ini
     
-    # Buat list untuk menyimpan tautan href unik
+    # Buat list untuk menyimpan tautan href dan judul unik
     listresult = []
     
     def scrape_links(div):
         if div:
-            # Temukan semua tautan href di dalam div target
-            links = div.find_all('a', href=True)
+            # Temukan semua elemen post
+            posts = div.find_all('div', class_='item')
             
-            # Loop melalui tautan href
-            for link in links:
-                # Hanya tambahkan tautan href jika belum ada dalam listresult
-                href = link['href']
-                if href not in listresult:
-                    listresult.append(href)
+            # Loop melalui elemen post
+            for post in posts:
+                # Ambil judul dan URL
+                title = post.find('h3').text
+                url = post.find('a')['href']
+                
+                # Hanya tambahkan jika belum ada dalam listresult
+                if {'title': title, 'url': url} not in listresult:
+                    listresult.append({'title': title, 'url': url})
     
     # Panggil fungsi untuk scrape link dari target_div1, target_div2, dan target_div3
     scrape_links(target_div1)
     scrape_links(target_div2)
     scrape_links(target_div3)
     
-    # Print semua tautan href unik
-    for unique_link in listresult:
-        print(unique_link)
+    # Tulis hasil ke dalam file halaman_home.json
+    with open('halaman_home.json', 'w') as file:
+        json.dump(listresult, file, indent=4)
+    print("Berhasil disimpan ke halaman_home.json")
 else:
     print(f'Error: Status code {response.status_code}')
