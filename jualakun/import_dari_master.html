@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>import dari master</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">   
+</head>
+<body style="background-color:green;color: white;">
+    
+    <div class="container mt-2">
+        <h3>IMPORT URL DARI MASTER</h3>
+        <a href="index.html" class="btn btn-danger">kembali</a>
+
+        <div class="mt-2">
+            <input type="text" id="pagenow" name=""
+            placeholder="masukan page berapa" 
+            >
+            <br>
+            <input type="text" id="per_page" name="" 
+            placeholder="masukan jumlah page " 
+            class="mt-2">
+            <br>
+            <button class="btn btn-primary mt-4" onclick="getData()">generate</button>
+        </div>
+
+        <div class="result mt-4" id="result"></div>
+        <button class="btn btn-primary mt-2" onclick="copyResult()">Copy</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function getData() {
+            var page = document.getElementById("pagenow").value;
+            var perPage = document.getElementById("per_page").value;
+
+            // Lakukan permintaan ke API
+            var apiUrl = `https://testdood.vercel.app/posts?page=${page}&per_page=${perPage}`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var resultElement = document.getElementById("result");
+                    resultElement.innerHTML = ""; // Bersihkan hasil sebelumnya
+
+                    // Iterasi melalui data dan tampilkan title dan file_code
+                    data.data.forEach(item => {
+                        var title = document.createElement("p");
+                        title.innerText =  item.title;
+                        resultElement.appendChild(title);
+
+                        var fileCode = document.createElement("p");
+                        fileCode.innerText = "https://ds2play.com/d/" + item.file_code;
+                        resultElement.appendChild(fileCode);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function copyResult() {
+            var resultElement = document.getElementById("result");
+            var range = document.createRange();
+            range.selectNode(resultElement);
+            window.getSelection().removeAllRanges(); // Clear existing selection
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges(); // Clear selection after copy
+            alert("Result copied!");
+        }
+    </script>
+</body>
+</html>
