@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>penghapus kata</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color:black;color: white;">
+
+<div class="container mt-2">
+    <h1>penghapus kata</h1>
+    
+    <textarea id="inputText" style="width: 100%;height:280px"></textarea>
+    <button class="mt-2 btn btn-danger" onclick="hapusKata()">Hapus</button>
+
+    <div id="result" class="mt-2"></div>
+
+    <button class="mt-4 btn btn-primary"
+    style="width:50%" 
+     onclick="copydata()">Copy</button>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function hapusKata() {
+    var inputText = document.getElementById("inputText").value;
+    var urls = inputText.match(/https:\/\/\S+/g);
+    var resultElement = document.getElementById("result");
+
+    if (urls) {
+        resultElement.innerHTML = "";
+        urls.forEach(url => {
+            var urlElement = document.createElement("p");
+            urlElement.innerText = url;
+            resultElement.appendChild(urlElement);
+        });
+    } else {
+        resultElement.innerHTML = "Tidak ada URL yang ditemukan.";
+    }
+    
+    // Remove extra line breaks
+    var resultText = resultElement.innerText.replace(/\n{2,}/g, '\n');
+    resultElement.innerText = resultText;
+}
+
+function copydata() {
+    var resultElement = document.getElementById("result");
+    var urls = resultElement.innerText.trim();
+
+    if (urls !== "") {
+        var textarea = document.createElement("textarea");
+        textarea.value = urls;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        alert("URLs copied!");
+    } else {
+        alert("No URLs to copy!");
+    }
+}
+
+
+</script>
+
+</body>
+</html>
