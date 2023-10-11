@@ -60,15 +60,31 @@
         }
 
         function copyResult() {
-            var resultElement = document.getElementById("result");
-            var range = document.createRange();
-            range.selectNode(resultElement);
-            window.getSelection().removeAllRanges(); // Clear existing selection
-            window.getSelection().addRange(range);
-            document.execCommand("copy");
-            window.getSelection().removeAllRanges(); // Clear selection after copy
-            alert("Result copied!");
-        }
+                var resultElement = document.getElementById("result");
+                var urls = resultElement.querySelectorAll("p");
+
+                var textToCopy = "";
+
+                urls.forEach(url => {
+                    var urlText = url.innerText;
+                    if (urlText.startsWith("https://")) {
+                        textToCopy += urlText + "\n";
+                    }
+                });
+
+                if (textToCopy !== "") {
+                    var textarea = document.createElement("textarea");
+                    textarea.value = textToCopy;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(textarea);
+                    alert("URLs copied!");
+                } else {
+                    alert("No URLs starting with 'https://' found!");
+                }
+            }
+
     </script>
 </body>
 </html>
