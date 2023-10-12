@@ -1,0 +1,1 @@
+git remote add  origin   https://bobwatcherx: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@huggingface.co/spaces/bobwatcherx/scraperdood
