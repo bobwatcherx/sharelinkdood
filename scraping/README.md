@@ -1,11 +1,10 @@
 ---
-title: Scrapingdood
-emoji: 👀
-colorFrom: gray
-colorTo: red
+title: Scraperdood
+emoji: 🚀
+colorFrom: pink
+colorTo: green
 sdk: docker
-python_version: 3.9
-sdk_version: 0.10.2
-app_file: main.py
-
+pinned: false
 ---
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
