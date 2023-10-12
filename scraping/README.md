@@ -4,6 +4,7 @@ emoji: 🚀
 colorFrom: pink
 colorTo: green
 sdk: docker
+app_file: app.py
 pinned: false
 ---
 
