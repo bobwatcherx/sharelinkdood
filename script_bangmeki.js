@@ -21,25 +21,21 @@ function generateLink() {
     const url = `https://poophdserver.vercel.app/${genre}?key=${apiKey}&limit=${perPage}&page=${page}`;
 
     // Melakukan permintaan HTTP
-    fetch(url)
+     fetch(url)
         .then(response => response.json())
         .then(data => {
             const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = ''; // Kosongkan konten sebelumnya
+            resultDiv.innerHTML = ''; // Clear previous content
 
             if (data.videos.length > 0) {
                 data.videos.forEach(video => {
-                    // Tambahkan judul video
                     const titleElement = document.createElement('h5');
                     titleElement.textContent = video.title;
                     resultDiv.appendChild(titleElement);
 
-                    // Tambahkan ID video
                     const idElement = document.createElement('p');
-                    idElement.textContent = `https://bangmeki.vercel.app/player/${video.id}`;
+                    idElement.innerHTML = `https://bangmeki.vercel.app/player/${video.id}<br>`; // Use innerHTML to include <br>
                     resultDiv.appendChild(idElement);
-
-                    // ... (tambahkan elemen lain seperti durasi, tampilan, dll. sesuai kebutuhan)
                 });
             } else {
                 resultDiv.textContent = "Tidak ada video yang ditemukan.";
