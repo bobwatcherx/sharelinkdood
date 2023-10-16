@@ -18,7 +18,7 @@ function generateLink() {
     const genre = document.getElementById('genre').value;
 
     // Membuat URL berdasarkan input fields
-    const url = `https://spring-bud-cod-toga.cyclic.app/${genre}?key=${apiKey}&limit=${perPage}&page=${page}`;
+    const url = `https://corsany-1-g0403094.deta.app/https://poophd.com/api/list?key=raQu2lrd&folder=${genre}?key=${apiKey}&limit=${perPage}&page=${page}`;
 
     // Melakukan permintaan HTTP
      fetch(url)
