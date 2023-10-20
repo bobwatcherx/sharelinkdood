@@ -9,16 +9,15 @@ function generateLink() {
         .then(data => {
             const resultDiv = document.getElementById("result");
             const files = data.result.files;
-            let links = '';
 
             files.forEach((file, index) => {
                 const title = file.title;
                 const file_code = file.file_code;
                 const link = `https://bangucup.vercel.app/player/${file_code}`;
-                links += `${title}<br>${link}<br><br>`;
+                const entryDiv = document.createElement("div");
+                entryDiv.textContent = `${title}\n${link}\n`;
+                resultDiv.appendChild(entryDiv);
             });
-
-            resultDiv.innerHTML = links;
 
             const total_pages = data.result.pages;
             const total_data = data.result.results_total;
@@ -30,7 +29,7 @@ function generateLink() {
             const copyButton = document.createElement("button");
             copyButton.textContent = "Copy";
             copyButton.addEventListener("click", function () {
-                const textToCopy = resultDiv.innerHTML;
+                const textToCopy = resultDiv.textContent;
                 const textArea = document.createElement("textarea");
                 textArea.value = textToCopy;
                 document.body.appendChild(textArea);
