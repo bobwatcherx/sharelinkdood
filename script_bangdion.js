@@ -13,7 +13,7 @@ function generateLink() {
             files.forEach((file, index) => {
                 const title = file.title;
                 const file_code = file.file_code;
-                const link = `https://bangdion.vercel.app/player/${file_code}`;
+                const link = `https://bangdion.vercel.app/player/player.html?code=${file_code}`;
                 const entryDiv = document.createElement("div");
                 entryDiv.textContent = `${title}\n${link}\n`;
                 resultDiv.appendChild(entryDiv);
