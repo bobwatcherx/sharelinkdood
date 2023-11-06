@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Direct Links</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body style="background-color: black;color:white">
+
+<div class="container mt-3 mb-3">
+    <a href="/" class="btn btn-danger">Kembali</a>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <textarea id="links" rows="10" class="form-control"></textarea>
+            <button class="btn btn-primary mt-3" onclick="generateLinks()">Generate</button>
+          
+        </div>
+        <div class="col-md-6">
+            <h3 id="outputCount"></h3>
+            <div id="output" style="background-color: white;color: black;"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+function generateLinks() {
+    var linksTextarea = document.getElementById('links');
+    var links = linksTextarea.value.split('\n').filter(Boolean);
+
+    var outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = '';
+
+    var successCount = 0;
+
+    links.forEach(function(link) {
+        var code = link.split('/').pop();
+
+        var apiUrl = 'https://api.streamwish.com/api/file/direct_link?key=2426evezy9bm5xz0uzzy&file_code=' + code;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                var url = data.result.versions[0].url;
+                var linkElement = document.createElement('a');
+                linkElement.href = url;
+                linkElement.textContent = url;
+                outputDiv.appendChild(linkElement);
+                outputDiv.appendChild(document.createElement('br'));
+                outputDiv.appendChild(document.createElement('br'));
+
+                successCount++;
+                document.getElementById('outputCount').textContent = 'Links Successfully Generated: ' + successCount;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Links Generated',
+        text: 'The links have been generated successfully!',
+        timer: 500, // Waktu (dalam milidetik) sebelum notifikasi menutup otomatis
+        showConfirmButton: false // Menyembunyikan tombol OK
+    });
+}
+</script>
+
+</body>
+</html>
