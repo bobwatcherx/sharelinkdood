@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Generate Link</title>
+  
+  <!-- Tautan Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color:black;color:white">
+
+  <div class="container mt-5">
+    <a href="index.html" class="btn btn-primary">kembali</a>
+    <h1 class="mb-4">Generate Link QRJAV </h1>
+
+    <!-- Formulir untuk input code, artis, video, dan download -->
+    <form id="linkForm">
+      <div class="mb-3">
+        <label for="code" class="form-label">Code:</label>
+        <input type="text" class="form-control" id="code" name="code" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="artis" class="form-label">Artis:</label>
+        <input type="text" class="form-control" id="artis" name="artis" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="video" class="form-label">Video URL:</label>
+        <input type="url" class="form-control" id="video" name="video" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="download" class="form-label">Download URL:</label>
+        <input type="url" class="form-control" id="download" name="download" required>
+      </div>
+
+      <button type="button" class="btn btn-primary" onclick="generateLink()">Buat Link</button>
+    </form>
+
+    <!-- Hasil link yang dihasilkan -->
+    <div class="mt-4 mb-5">
+      <h3>Link yang dihasilkan:</h3>
+      <p id="generatedLink"></p>
+     <button onclick="copyToClipboard()"
+     class="btn btn-danger" 
+     style="width:100%" 
+     >Copy</button>
+    </div>
+
+  </div>
+
+  <!-- Tautan Bootstrap JS dan Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function generateLink() {
+      // Ambil nilai dari input
+      var code = document.getElementById('code').value;
+      var artis = document.getElementById('artis').value;
+      var video = document.getElementById('video').value;
+      var download = document.getElementById('download').value;
+
+      // Bentuk URL dengan parameter
+      var link = `http://localhost:5000/?code=${code}&artis=${artis}&video=${video}&download=${download}`;
+
+      // Tampilkan link yang dihasilkan
+      document.getElementById('generatedLink').innerText = link;
+    }
+
+    function copyToClipboard() {
+      var linkElement = document.getElementById('generatedLink');
+      var linkText = linkElement.innerText;
+
+      // Buat elemen textarea sementara untuk menyalin teks ke clipboard
+      var textarea = document.createElement('textarea');
+      textarea.value = linkText;
+      document.body.appendChild(textarea);
+      
+      // Pilih teks dalam textarea
+      textarea.select();
+      document.execCommand('copy');
+
+      // Hapus elemen textarea
+      document.body.removeChild(textarea);
+
+      alert('Link berhasil disalin ke clipboard!');
+    }
+
+  </script>
+</body>
+</html>
