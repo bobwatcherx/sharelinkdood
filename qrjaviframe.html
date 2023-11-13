@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>dwqdqw</title>
+</head>
+
+<body style="background-color:black;color: white;">
+    <a style="color:white;" href="index.html">BERANDA</a>
+    <a style="color:white;" href="generate_qrjav.html">kembali</a>
+    <br>
+    <input type="text" id="urlInput" style="width:50%;height:30px">
+    <button id="cari" onclick="gantiSrc()">Set Iframe</button>
+    <br>
+    <iframe src="" id="video" style="margin-top:20px" width="100%" height="450px"
+        sandbox="allow-same-origin allow-scripts"></iframe>
+
+    <script>
+        function gantiSrc() {
+            var inputUrl = document.getElementById("urlInput").value;
+            document.getElementById("video").src = inputUrl;
+        }
+    </script>
+</body>
+
+</html>
