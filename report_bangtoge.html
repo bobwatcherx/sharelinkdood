@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Data API</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color:black;color:white">
+  <a href="index.html" class="btn btn-primary">Generated Link</a>
+  <h1>laporan BANG TOGE </h1>
+    <div class="container mt-5">
+        <h1>Data API</h1>
+        <table class="table table-bordered"
+        style="color:white;font-weight: bold;" 
+        >
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Downloads</th>
+                    <th>Views</th>
+                    <th>Profit Views</th>
+                    <th>Profit Total</th>
+                </tr>
+            </thead>
+            <tbody id="api-data-body"></tbody>
+        </table>
+    </div>
+
+    <script>
+        fetch("https://corsany-1-g0403094.deta.app/https://doodapi.com/api/account/stats?key=291959xu8erref8zbc28jx")
+            .then(response => response.json())
+            .then(data => {
+                const result = data.result;
+                const tbody = document.getElementById("api-data-body");
+
+                result.forEach(item => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${item.day}</td>
+                        <td>${item.downloads}</td>
+                        <td>${item.views}</td>
+                        <td>${item.profit_total}</td>
+                        <td>${item.profit_views}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
