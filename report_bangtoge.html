@@ -8,7 +8,19 @@
 </head>
 <body style="background-color:black;color:white">
   <a href="index.html" class="btn btn-primary">Generated Link</a>
-  <h1>laporan BANG TOGE </h1>
+  <div style="display:flex;justify-content:space-between;">
+      <h1>laporan BANG TOGE </h1>
+
+  <a href="remoteupload_bangtoge.html"
+  class="btn btn-danger" 
+  >UPLOAD HANYA BANG TOGE UPLOAD</a>
+  </div>
+  <br>
+  <div id="saldosaya" class="container">
+      
+  </div>
+  <br>
+
     <div class="container mt-5">
         <h1>Data API</h1>
         <table class="table table-bordered"
@@ -28,6 +40,24 @@
     </div>
 
     <script>
+        fetch("https://corsany-1-g0403094.deta.app/https://doodapi.com/api/account/info?key=291959xu8erref8zbc28jx")
+            .then(response => response.json())
+            .then(data => {
+                const result = data.result;
+                const saldosayaDiv = document.getElementById("saldosaya");
+                const email = result.email;
+                const balance = result.balance;
+                const storageUsed = result.storage_used;
+
+                // Display email, balance, and storage_used in the specified div
+                saldosayaDiv.innerHTML = `
+                    <p>Email: ${email}</p>
+                    <p>Balance: ${balance}</p>
+                    <p>Storage Used: ${storageUsed}</p>
+                `;
+            })
+            .catch(error => console.error('Error:', error));
+
         fetch("https://corsany-1-g0403094.deta.app/https://doodapi.com/api/account/stats?key=291959xu8erref8zbc28jx")
             .then(response => response.json())
             .then(data => {
