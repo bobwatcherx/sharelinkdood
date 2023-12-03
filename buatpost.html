@@ -44,7 +44,7 @@
     let imageArray = imageText.split("\n");
 
     // Buat tag img untuk setiap link gambar
-    let imageHTML = imageArray.map(link => `<img src="${link}" alt="gambar">`).join("\n");
+    let imageHTML = imageArray.map(link => `<img src="${link}.webp" alt="gambar">`).join("\n");
 
     // Ambil nilai dari textarea postingan
     let postText = document.getElementById("postTextarea").value;
@@ -64,6 +64,7 @@
 
     // Tampilkan hasil atau lakukan operasi lain sesuai kebutuhan Anda
     console.log(finalHTML);
+
      Swal.fire({
         icon: 'success',
         title: 'Berhasil!',
