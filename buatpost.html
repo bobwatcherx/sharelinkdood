@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUAT POST FB</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+ 
+</head>
+<body style="background-color: black;color: white;">
+    <div class="container mt-2">
+        <a href="index.html" class="btn btn-primary">KEMBALI</a>
+        <h3>Buat POSTINGAN HTML FB</h3>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- IMAGE  -->
+                <h4>KHUSUS GAMBAR</h4>
+                <textarea id="imageTextarea" cols="30" rows="10" style="width:100%"></textarea>
+            </div>
+            <div class="col-md-6">
+                <!-- POSOTNGAN  -->
+                <h4>KHUSUS POSTINGAN</h4>
+                <textarea id="postTextarea" cols="30" rows="10" style="width:100%"></textarea>
+            </div>
+        </div>
+        <!-- SUBMIT -->
+        <button onclick="buatHTML()" class="btn btn-primary mt-3" style="width:100%">BUAT HTML SEKARANG</button>
+
+        <!-- RESULT -->
+        <div id="result"></div>
+    </div>
+
+    <!-- Tambahkan link ke Bootstrap JavaScript (JQuery dan Popper.js) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+    <script>
+        function buatHTML() {
+    // Ambil nilai dari textarea gambar
+    let imageText = document.getElementById("imageTextarea").value;
+    let imageArray = imageText.split("\n");
+
+    // Buat tag img untuk setiap link gambar
+    let imageHTML = imageArray.map(link => `<img src="${link}" alt="gambar">`).join("\n");
+
+    // Ambil nilai dari textarea postingan
+    let postText = document.getElementById("postTextarea").value;
+    let postArray = postText.split("\n");
+
+    // Buat tag p dan a untuk setiap postingan
+    let postHTML = postArray.map(post => {
+        if (post.startsWith("https")) {
+            return `<a href="${post}" target="_blank">${post}</a>`;
+        } else {
+            return `<p>${post}</p>`;
+        }
+    }).join("\n");
+
+    // Gabungkan hasil dari kedua textarea
+    let finalHTML = `${imageHTML}\n${postHTML}`;
+
+    // Tampilkan hasil atau lakukan operasi lain sesuai kebutuhan Anda
+    console.log(finalHTML);
+     Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        timer: 600,
+        showConfirmButton: false,
+    });
+    // Misalnya, Anda dapat menetapkan hasil ke elemen HTML tertentu atau menyimpannya dalam variabel
+}
+
+    </script>
+
+</html>
