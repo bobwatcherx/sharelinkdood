@@ -17,7 +17,7 @@ function generateLink() {
     const perPage = document.getElementById('per_page').value;
     const genre = document.getElementById('genre').value;
     // Membuat URL berdasarkan input fields
-    const url = `https://corsany-1-g0403094.deta.app/https://poophd.com/api/list?key=raQu2lrd&folder=${genre}&limit=${perPage}&page=${page}`;
+    const url = `https://pooptest.vercel.app/${genre}?page=${page}`;
 
     // Melakukan permintaan HTTP
      fetch(url)
