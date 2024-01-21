@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pornhub API Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    #loading {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <a href="../index.html" class="btn btn-danger">Kembali ke beranda</a>
+  <h2 class="mb-4">Pornhub API Results</h2>
+
+  <div class="mb-3">
+    <button id="previousBtn" class="btn btn-primary">Previous</button>
+    <button id="nextBtn" class="btn btn-primary">Next</button>
+  </div>
+  <select name="" id="selectfilm">
+    <option value="pornhub">pornhub</option>
+    <option value="redtube">redtube</option>
+    <option value="xnxx">xnxx</option>
+    <option value="xvideos">xvideos</option>
+    <option value="xhamster">xhamster</option>
+  </select>
+  <select name="" id="sortfilm">
+    <option value="mr">mr</option>
+    <option value="mv">mv</option>
+    <option value="tr">tr</option>
+    <option value="lg">lg</option>
+  </select>
+  <button id="copyLinkBtn" class="btn btn-primary">COPY link</button>
+
+  <div class="input-group mb-3">
+    <input type="text" id="cari" class="form-control" placeholder="Search term" value="jav">
+    <div class="input-group-append">
+      <button id="searchBtn" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+
+  <div id="loading" class="text-center">
+    <div class="d-flex justify-content-center">
+  <div class="spinner-border" role="status" style="width:7rem;height: 7rem">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+  </div>
+  
+  <h4 id="currentPageLabel">Halaman: 1</h4>
+
+  <ul class="list-group">
+    <!-- API results will be dynamically inserted here -->
+  </ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  let currentPage = 1;
+
+  const listContainer = document.querySelector('.list-group');
+  const previousBtn = document.getElementById('previousBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const loadingDiv = document.getElementById('loading');
+  const currentPageLabel = document.getElementById('currentPageLabel');
+  const copyLinkBtn = document.getElementById('copyLinkBtn');
+  const searchBtn = document.getElementById('searchBtn');
+  const searchInput = document.getElementById('cari');
+  const typefilm = document.getElementById('selectfilm');
+  const sortfilm = document.getElementById('sortfilm');
+
+  function showLoading() {
+    loadingDiv.style.display = 'block';
+  }
+
+  function hideLoading() {
+    loadingDiv.style.display = 'none';
+  }
+
+  function updatePageLabel() {
+    currentPageLabel.textContent = `Halaman: ${currentPage}`;
+  }
+
+  function fetchAndRenderData(page, search = '',type,sort) {
+    showLoading();
+
+    let apiUrl = `https://lust.scathach.id/${type}/search?page=${page}&sort=${sort}`;
+    
+    if (search) {
+      apiUrl += `&key=${search}`;
+    }
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        hideLoading();
+
+        if (data.success) {
+          listContainer.innerHTML = ''; // Clear previous content
+          data.data.forEach(video => {
+            const listItem = `
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img src="${video.image}" class="img-thumbnail" alt="${video.title}">
+                  </div>
+                  <div class="col-md-8">
+                    <h5 class="mt-2">${video.title}</h5>
+                    <p>${video.duration} | ${video.views}</p>
+                    <a href="${video.link}" class="btn btn-primary" target="_blank">Watch on Pornhub</a>
+                  </div>
+                </div>
+              </li>
+            `;
+            listContainer.innerHTML += listItem;
+          });
+
+          updatePageLabel();
+        } else {
+          console.error('API request failed');
+        }
+      })
+      .catch(error => {
+        hideLoading();
+        console.error('Error fetching data:', error);
+      });
+  }
+
+  previousBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      fetchAndRenderData(currentPage, searchInput.value,typefilm.value,sortfilm.value);
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentPage++;
+    fetchAndRenderData(currentPage, searchInput.value,typefilm.value,sortfilm.value);
+  });
+
+  copyLinkBtn.addEventListener('click', () => {
+    const links = document.querySelectorAll('.list-group-item a.btn-primary');
+    const linksText = Array.from(links).map(link => link.href).join('\n');
+
+    if (linksText) {
+      navigator.clipboard.writeText(linksText)
+        .then(() => alert('Video links copied to clipboard!'))
+        .catch(error => console.error('Error copying to clipboard:', error));
+    } else {
+      alert('No video links to copy!');
+    }
+  });
+
+  searchBtn.addEventListener('click', () => {
+    currentPage = 1;
+    fetchAndRenderData(currentPage, searchInput.value,typefilm.value,sortfilm.value);
+  });
+
+  // Initial fetch and render
+   fetchAndRenderData(currentPage, searchInput.value,typefilm.value,sortfilm.value);
+</script>
+
+</body>
+</html>
