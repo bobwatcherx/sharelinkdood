@@ -33,7 +33,7 @@ function generateLink() {
                     resultDiv.appendChild(titleElement);
 
                     const idElement = document.createElement('p');
-                    idElement.innerHTML = `https://bangmeki.vercel.app/player/${video.id}<br>`; // Use innerHTML to include <br>
+                    idElement.innerHTML = `https://bangmeki.netlify.app/player/${video.id}<br>`; // Use innerHTML to include <br>
                     resultDiv.appendChild(idElement);
                 });
             } else {
