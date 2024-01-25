@@ -33,9 +33,6 @@
     </div>
     <div style="display:flex;justify-content: space-between;color:white">
         <a href="index.html">Generated Link</a>
-        <a href="generate_indopremium.html"
-        class="btn btn-primary" 
-        >Generated Link INDO PREMIUM</a>
         <a href="iframetest.html"
         class="btn btn-success" 
         >IFRAME TEST</a>
@@ -46,35 +43,6 @@
         <a href="https://caribokep.vercel.app/">Xvideos</a>
         <a href="perbaikan.html">Perbaikan kata</a>
     </div>
-    <div style="display:flex;justify-content: space-between;color:white">
-    
-        <a href="generate_bangewe.html"
-        class="btn btn-primary" 
-        >Generated Link BANG EWE</a>
-         <a href="generate_bangbontot.html"
-        class="btn btn-warning" 
-        >Generated Link BANG BONTOT</a>
-         <a href="link_post.html"
-        class="btn btn-danger" 
-        >Buat Post Card TELE</a>
-        <a href="/lustpress/index.html"
-        class="btn btn-warning" 
-        >CARO BOKEP PORNHUB/XVIDEOS</a>
-    </div>
-    <div style="display:flex;justify-content: space-between;color:white">
-           <a href="generate_bangcoli.html"
-        class="btn" style="background-color: purple;color:white" 
-        >Generated Link Bang Coli</a>
-        <a href="generate_bangentot.html"
-        class="btn" style="background-color: black;color:white" 
-        >Generated Link Bang Entot</a>
-    </div>
-     <div style="display:flex;justify-content: space-between;color:white">
-           <a href="generate_bokepcinta.html"
-        class="btn" style="background-color: pink;color:black" 
-        >Generated Link Bokep CINTA</a>
-    </div>
-
     <!-- JUAL AKUN DOOD -->
     <div style="display:flex;justify-content: space-between;color:white">
            <a href="/jualakun/index.html"
@@ -82,8 +50,8 @@
         >JUAL AKUN DOOD</a>
          <a href="generate_bangmeki.html"
         class="btn" style="background-color: black;color: white;" 
-        >Generated Link Bang MEKI</a>
-        <a href="https://scrapepoopmom.vercel.app/"
+        >Generated Link POOP HD</a>
+        <a href="https://bobwatcherx-poopmomscrape.hf.space"
         class="btn" style="background-color: cyan;color: black;" 
         >Scraper POOP MOM</a>
     </div>
@@ -91,52 +59,8 @@
                <a href="jualakun/penghapus_kata.html"
         class="btn" style="background-color: grey;color:white" 
         >penghapus kata</a>  
-        <a href="generate_bangdion.html"
-        class="btn" style="background-color: black;color:white" 
-        >generate Bang DION</a>   
-       <a href="generate_bangucup.html"
-        class="btn" style="background-color: yellow;color:black" 
-        >generate Bang UCUP</a>      
     </div>
-    <div style="display:flex;justify-content: space-between;color:white">
-        <a href="generate_bangmomon.html"
-        class="btn" style="background-color: purple;color:white" 
-        >generate Bang MOMON</a>  
-        <a href="generate_bangpoe.html"
-        class="btn" style="background-color: green;color:white" 
-        >generate Bang POE</a>  
-    </div>
-    <div style="display:flex;justify-content: space-between;color:white">
-         <a href="generate_banglulu.html"
-        class="btn" style="background-color: white;color:black" 
-        >generate Bang LULU</a>  
-        <a href="generate_qrjav.html"
-        class="btn" style="background-color: yellow;color:black" 
-        >generate QR JAV</a>
-        <a href="generate_bangoyo.html"
-        class="btn" style="background-color: blue;color:white" 
-        >generate bang oyo</a>    
-    </div>
-    <div style="display:flex;justify-content: space-between;color:white">
-         <a href="buatpost.html"
-        class="btn" style="background-color: black;color:white" 
-        >BUAT POSTINGAN FB</a> 
-         <a href="generate_nengsusu.html"
-        class="btn" style="background-color: pink;" 
-        >GENERATE NENG SUSU</a>    
-        <a href="generate_bokepindo.html"
-        class="btn" style="background-color: green;color:white" 
-        >GENERATE bokep INDo</a>    
-    </div> 
-     <div style="display:flex;justify-content: space-between;color:white">
-         <a href="generate_doodmantep.html"
-        class="btn" style="background-color: pink;" 
-        >GENERATE DOOD MANTEP</a>   
-        <a href="generate_pengenentot.html"
-        class="btn" style="background-color: pink;" 
-        >GENERATE Pengen ENTOT</a> 
-    </div>
-    <h4>Generate Link DOOD</h4>
+   <h4>Generate Link DOOD</h4>
         <div class="form-group">
             <label for="page">Page:</label>
             <input type="number" class="form-control" id="page" value="1">
@@ -145,19 +69,20 @@
             <label for="per_page">Per Page:</label>
             <input type="number" class="form-control" id="per_page" value="65">
         </div>
+
+        <select name="select_domain" id="select_domain"></select>
         <button class="btn btn-primary" onclick="generateLink()">Generate Link</button>
-    </div>
-    <div class="container mt-4">
-        <div id="result">
-            <!-- Hasil title dan link akan ditampilkan di sini -->
         </div>
-    </div>
-    <div class="container mt-4">
-        <div id="pagination-info">
-            Total Pages: <span id="total_pages"></span><br>
-            Total Data: <span id="total_data"></span>
+        <div class="container mt-4">
+            <div id="result"></div>
         </div>
-    </div>
+        <div class="container mt-4">
+            <div id="pagination-info">
+                Total Pages: <span id="total_pages"></span><br>
+                Total Data: <span id="total_data"></span>
+            </div>
+        </div>
+
 
    <!-- Tambahkan link ke Bootstrap JavaScript (JQuery dan Popper.js) -->
    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
