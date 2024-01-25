@@ -9,18 +9,18 @@
         alert('Berhasil menyalin ke clipboard!');
     }
     
-
 function generateLink() {
     // Mengambil nilai dari input fields
     const apiKey = document.getElementById('apikey').value;
     const page = document.getElementById('page').value;
     const perPage = document.getElementById('per_page').value;
-    const genre = document.getElementById('genre').value;
+    const genre = document.getElementById('genre').value
+    const domain = document.getElementById('domain').value;
     // Membuat URL berdasarkan input fields
     const url = `https://bobwatcherx-serverpoophd.hf.space/film?kode_film=${genre}&page=${page}`;
 
     // Melakukan permintaan HTTP
-     fetch(url)
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             const resultDiv = document.getElementById('result');
@@ -33,7 +33,7 @@ function generateLink() {
                     resultDiv.appendChild(titleElement);
 
                     const idElement = document.createElement('p');
-                    idElement.innerHTML = `https://bangmeki.netlify.app/player/${video.id}<br>`; // Use innerHTML to include <br>
+                    idElement.innerHTML = `${domain}/player/${video.id}<br>`; // Use innerHTML to include <br>
                     resultDiv.appendChild(idElement);
                 });
             } else {
