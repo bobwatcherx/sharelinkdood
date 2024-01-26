@@ -36,6 +36,29 @@
         </div>
     </div>
 
+     <!-- DATA POCKET -->
+    <div style="margin-top:5px">
+        <div id="data_api"></div>
+        <div id="pagination" class="mt-3">
+            <!-- Pagination controls will be added here dynamically -->
+        </div>
+        <table class="table table-bordered table-dark mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>URL Link</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Table rows will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+
     <!-- Bootstrap JS and dependencies (jQuery, Popper.js) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -44,6 +67,71 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
+
+        // DATA PocketBase
+         function displayTable(items) {
+            // Display data in the table
+            var tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            items.forEach(function (item) {
+                var row = tableBody.insertRow(tableBody.rows.length);
+                var cellId = row.insertCell(0);
+                var cellTitle = row.insertCell(1);
+                var cellUrlLink = row.insertCell(2);
+                var cellCreated = row.insertCell(3);
+                var cellUpdated = row.insertCell(4);
+
+                cellId.innerHTML = item.id;
+                cellTitle.innerHTML = item.title;
+                cellUrlLink.innerHTML = '<a href="' + item.url_link + '">' + item.url_link + '</a>';
+                cellCreated.innerHTML = item.created;
+                cellUpdated.innerHTML = item.updated;
+            });
+        }
+
+        function displayPagination(page, perPage, totalPages, totalItems) {
+            // Display pagination controls
+            var paginationDiv = document.getElementById('pagination');
+            paginationDiv.innerHTML = '';
+
+            for (var i = 1; i <= totalPages; i++) {
+                var button = document.createElement('button');
+                button.innerText = i;
+                button.className = 'btn btn-sm btn-primary';
+                button.onclick = function () {
+                    // Handle pagination click event
+                    var selectedPage = parseInt(this.innerText);
+                    // You may want to fetch the data for the selected page from the API
+                    // and update the table and pagination accordingly
+                    // For simplicity, I'm just alerting the selected page
+                    fetchDataFromPocketBase(selectedPage, 15);
+                };
+
+                paginationDiv.appendChild(button);
+            }
+        }
+       function fetchDataFromPocketBase(page, perPage) {
+                var apiUrl = 'https://poophdpocket.pockethost.io/api/collections/playerx/records';
+                var queryParams = `?page=${page}&perPage=${perPage}`;
+
+                fetch(apiUrl + queryParams)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+
+                        // Sort items based on the "updated" field in descending order
+                        const sortedItems = data.items.sort((a, b) => new Date(b.updated) - new Date(a.updated));
+
+                        // Display the sorted items in the table
+                        displayTable(sortedItems);
+                        displayPagination(data.page, data.perPage, data.totalPages, data.totalItems);
+                    })
+                    .catch(error => {
+                        showErrorAlert('Terjadi kesalahan saat mengambil data dari PocketBase: ' + error.message);
+                    });
+            }
+
         function submitToPocketBase() {
             // Mendapatkan nilai dari textarea
             var inputData = document.getElementById('inputText').value.trim();
@@ -66,6 +154,7 @@
                     showErrorAlert('Format tidak valid. Pastikan setiap baris berisi title dan url_link yang dipisahkan oleh karakter "|".');
                 }
             });
+             fetchDataFromPocketBase(1, 15);
         }
 
         function sendRequest(title, urlLink) {
@@ -113,6 +202,7 @@
                 text: message,
             });
         }
+         fetchDataFromPocketBase(1, 15);
     </script>
 
 </body>
