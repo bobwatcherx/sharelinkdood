@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit to PocketBase</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+</head>
+
+<body style="background-color: black;color:white">
+
+    <div class="container mt-3">
+        <a href="../index.html"
+        class="btn btn-primary" 
+        >Kembali</a>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h5 class="mb-4">Upload  playerX KE pockethost</h5>
+                <div>
+                    <textarea 
+                        style="width:100%;height:300px"
+                        class="form-control" 
+                        id="inputText" 
+                        placeholder="Masukkan data di sini"></textarea>
+                </div>
+
+                <!-- KIRIM -->
+                <button class="btn btn-primary mt-3" onclick="submitToPocketBase()">Kirim</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (jQuery, Popper.js) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        function submitToPocketBase() {
+            // Mendapatkan nilai dari textarea
+            var inputData = document.getElementById('inputText').value.trim();
+
+            // Memisahkan input berdasarkan baris
+            var lines = inputData.split('\n');
+
+            // Loop melalui setiap baris
+            lines.forEach(function(line) {
+                // Memisahkan title dan url_link berdasarkan karakter '|'
+                var parts = line.split('|');
+                var title = parts[1] ? parts[1].trim() : '';
+                var urlLink = parts[0] ? parts[0].trim() : '';
+
+                // Mengecek apakah title dan url_link tidak kosong
+                if (title && urlLink) {
+                    // Melakukan request API ke PocketBase
+                    sendRequest(title, urlLink);
+                } else {
+                    showErrorAlert('Format tidak valid. Pastikan setiap baris berisi title dan url_link yang dipisahkan oleh karakter "|".');
+                }
+            });
+        }
+
+        function sendRequest(title, urlLink) {
+            // URL endpoint API PocketBase
+            var apiUrl = 'https://poophdpocket.pockethost.io/api/collections/playerx/records';
+
+            // Data yang akan dikirim dalam body request
+            var data = {
+                title: title,
+                url_link: urlLink
+            };
+
+            // Melakukan request POST menggunakan Fetch API
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    showSuccessAlert('Data berhasil dikirim ke PocketBase.');
+                } else {
+                    showErrorAlert('Terjadi kesalahan saat mengirim data ke PocketBase.');
+                }
+            })
+            .catch(error => {
+                showErrorAlert('Terjadi kesalahan saat mengirim data ke PocketBase: ' + error.message);
+            });
+        }
+
+        function showSuccessAlert(message) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses!',
+                text: message,
+            });
+        }
+
+        function showErrorAlert(message) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: message,
+            });
+        }
+    </script>
+
+</body>
+</html>
