@@ -11,6 +11,7 @@ var list_domain = [
     "https://pengenentot.netlify.app",
     "https://bokepindo.netlify.app",
     "https://nengsusu.netlify.app",
+    "https://bangmeki.netlify.app",
     ]
 
 
