@@ -44,6 +44,7 @@
         </div>
           <h5>Total halaman: <span id="totalPages"></span></h5>
           <h5> halaman sekarang: <span id="currentPage"></span></h5>
+          <h5> TOTAL DATA: <span id="totaldata"></span></h5>
         <table class="table table-bordered table-dark mt-3">
             <thead>
                 <tr>
@@ -119,7 +120,8 @@
         // Tambahkan informasi total halaman
         var totalPagesElement = document.getElementById('totalPages');
         totalPagesElement.innerText = totalPages;
-
+        var totalDataElement = document.getElementById('totaldata');
+    totalDataElement.innerText = totalItems;
         // Tambahkan informasi halaman sekarang
         var currentPageElement = document.getElementById('currentPage');
         currentPageElement.innerText = page;
