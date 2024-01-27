@@ -42,6 +42,8 @@
         <div id="pagination" class="mt-3">
             <!-- Pagination controls will be added here dynamically -->
         </div>
+          <h5>Total halaman: <span id="totalPages"></span></h5>
+          <h5> halaman sekarang: <span id="currentPage"></span></h5>
         <table class="table table-bordered table-dark mt-3">
             <thead>
                 <tr>
@@ -91,29 +93,41 @@
         }
 
         function displayPagination(page, perPage, totalPages, totalItems) {
-            // Display pagination controls
-            var paginationDiv = document.getElementById('pagination');
-            paginationDiv.innerHTML = '';
+        var paginationDiv = document.getElementById('pagination');
+        paginationDiv.innerHTML = '';
 
-            for (var i = 1; i <= totalPages; i++) {
-                var button = document.createElement('button');
-                button.innerText = i;
-                button.className = 'btn btn-sm btn-primary';
-                button.onclick = function () {
-                    // Handle pagination click event
-                    var selectedPage = parseInt(this.innerText);
-                    // You may want to fetch the data for the selected page from the API
-                    // and update the table and pagination accordingly
-                    // For simplicity, I'm just alerting the selected page
-                    fetchDataFromPocketBase(selectedPage, 15);
-                };
+        // Tambahkan tombol "Previous"
+        var previousButton = document.createElement('button');
+        previousButton.innerText = 'Previous';
+        previousButton.className = 'btn btn-sm btn-primary';
+        previousButton.onclick = function () {
+            var currentPage = page > 1 ? page - 1 : 1;
+            fetchDataFromPocketBase(currentPage, perPage);
+        };
+        paginationDiv.appendChild(previousButton);
 
-                paginationDiv.appendChild(button);
-            }
-        }
+        // Tambahkan tombol "Next"
+        var nextButton = document.createElement('button');
+        nextButton.innerText = 'Next';
+        nextButton.className = 'btn btn-sm btn-primary ml-2';
+        nextButton.onclick = function () {
+            var currentPage = page < totalPages ? page + 1 : totalPages;
+            fetchDataFromPocketBase(currentPage, perPage);
+        };
+        paginationDiv.appendChild(nextButton);
+
+        // Tambahkan informasi total halaman
+        var totalPagesElement = document.getElementById('totalPages');
+        totalPagesElement.innerText = totalPages;
+
+        // Tambahkan informasi halaman sekarang
+        var currentPageElement = document.getElementById('currentPage');
+        currentPageElement.innerText = page;
+    }
+
        function fetchDataFromPocketBase(page, perPage) {
                 var apiUrl = 'https://poophdpocket.pockethost.io/api/collections/playerx/records';
-                var queryParams = `?page=${page}&perPage=${perPage}`;
+                var queryParams = `?page=${page}&perPage=${perPage}&sort=-created`;
 
                 fetch(apiUrl + queryParams)
                     .then(response => response.json())

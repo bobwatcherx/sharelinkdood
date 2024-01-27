@@ -38,7 +38,7 @@
 			const jumlahpage = document.getElementById("jumlahpage").value;
 
 			// Buat URL untuk permintaan API
-			const apiUrl = `https://poophdpocket.pockethost.io/api/collections/playerx/records?page=${page}&perPage=${jumlahpage}`;
+			const apiUrl = `https://poophdpocket.pockethost.io/api/collections/playerx/records?page=${page}&perPage=${jumlahpage}&sort=-created`;
 
 			// Lakukan permintaan ke API menggunakan fetch
 			fetch(apiUrl)
