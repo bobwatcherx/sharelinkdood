@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>GENEARTE TUKANG ENTOT</title>
+	<!-- Tambahkan pautan ke Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		/* Gaya tambahan di sini */
+	</style>
+</head>
+<body style="background-color: red; color: white;" class="container mt-5">
+	<h3>Generate Tukang ENTOT</h3>
+	<a href="../index.html" class="btn btn-light">Kembali</a>
+	<br>
+	<div class="form-group mt-3">
+		<label for="page">Page:</label>
+		<input type="text" id="page" class="form-control">
+	</div>
+	<div class="form-group">
+		<label for="jumlahpage">Jumlah data:</label>
+		<input type="text" id="jumlahpage" class="form-control">
+	</div>
+	<button onclick="generateData()" class="btn btn-primary">Generate</button>
+
+	<div id="result" class="mt-3"></div>
+
+	<!-- Tambahkan pautan ke Bootstrap JS dan jQuery (diperlukan oleh Bootstrap) -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<script>
+		function generateData() {
+			// Ambil nilai dari input
+			const page = document.getElementById("page").value;
+			const jumlahpage = document.getElementById("jumlahpage").value;
+
+			// Buat URL untuk permintaan API
+			const apiUrl = `https://poophdpocket.pockethost.io/api/collections/playerx/records?page=${page}&perPage=${jumlahpage}`;
+
+			// Lakukan permintaan ke API menggunakan fetch
+			fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					// Tangkap elemen hasil di HTML
+					const resultElement = document.getElementById("result");
+
+					// Bersihkan elemen hasil sebelum menambahkan yang baru
+					resultElement.innerHTML = "";
+
+					// Tambahkan data ke dalam elemen hasil
+					data.items.forEach(item => {
+						const title = document.createElement("p");
+						title.textContent = `${item.title}`;
+
+						const urlLink = document.createElement("p");
+						urlLink.innerHTML = `https://tukangentot.netlify.app/player/${item.id}`;
+
+						resultElement.appendChild(title);
+						resultElement.appendChild(urlLink);
+					});
+				})
+				.catch(error => {
+					console.error('Error:', error);
+					// Handle error jika ada
+					const resultElement = document.getElementById("result");
+					resultElement.innerHTML = "Terjadi kesalahan saat mengambil data dari API.";
+				});
+		}
+	</script>
+</body>
+</html>
