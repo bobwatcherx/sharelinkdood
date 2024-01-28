@@ -28,6 +28,13 @@
                         placeholder="Masukkan data di sini"></textarea>
                 </div>
 
+                 <select name="category" id="categorySelect">
+                    <option value="">Semua</option>
+                    <option value="jav_full">jav_full</option>
+                    <option value="indo">indo</option>
+                    <option value="barat">barat</option>
+                </select>
+
                 <!-- KIRIM -->
                 <button class="btn btn-primary mt-3" onclick="submitToPocketBase()">Kirim</button>
 
@@ -152,6 +159,10 @@
         function submitToPocketBase() {
             // Mendapatkan nilai dari textarea
             var inputData = document.getElementById('inputText').value.trim();
+            var selectElement = document.getElementById("categorySelect");
+
+            // Dapatkan nilai yang dipilih
+            var selectedValue = selectElement.value;
 
             // Memisahkan input berdasarkan baris
             var lines = inputData.split('\n');
@@ -166,7 +177,7 @@
                 // Mengecek apakah title dan url_link tidak kosong
                 if (title && urlLink) {
                     // Melakukan request API ke PocketBase
-                    sendRequest(title, urlLink);
+                    sendRequest(title, urlLink,selectedValue);
                 } else {
                     showErrorAlert('Format tidak valid. Pastikan setiap baris berisi title dan url_link yang dipisahkan oleh karakter "|".');
                 }
@@ -174,14 +185,15 @@
              fetchDataFromPocketBase(1, 15);
         }
 
-        function sendRequest(title, urlLink) {
+        function sendRequest(title, urlLink,selectedValue) {
             // URL endpoint API PocketBase
             var apiUrl = 'https://poophdpocket.pockethost.io/api/collections/playerx/records';
 
             // Data yang akan dikirim dalam body request
             var data = {
                 title: title,
-                url_link: urlLink
+                url_link: urlLink,
+                type:selectedValue
             };
 
             // Melakukan request POST menggunakan Fetch API
