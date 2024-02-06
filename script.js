@@ -31,8 +31,7 @@ function generateLink() {
     const perPage = document.getElementById("per_page").value;
 
     // URL API dengan parameter page dan per_page
-    const api_url = `https://bobwatcherx-poophdserver.hf.space/https://doodapi.com/api/file/list?key=219725bbkborbourrp2cd4&page=${page}&per_page=${perPage}`;
-
+    const api_url = `https://oakdoodserver.deno.dev/file/list?key=219725bbkborbourrp2cd4&page=${page}&per_page=${perPage}`;
     // Melakukan permintaan GET ke API
     fetch(api_url)
         .then(response => response.json())

@@ -17,7 +17,7 @@ function generateLink() {
     const genre = document.getElementById('genre').value
     const domain = document.getElementById('domain').value;
     // Membuat URL berdasarkan input fields
-    const url = `https://bobwatcherx-serverpoophd.hf.space/film?kode_film=${genre}&page=${page}`;
+    const url = `https://poopoakserver.deno.dev/film?kode_film=${genre}&page=${page}`;
 
     // Melakukan permintaan HTTP
     fetch(url)
