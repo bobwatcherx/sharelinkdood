@@ -17,11 +17,11 @@ document.getElementById('generateLink').addEventListener('click', async () => {
   const perPage = document.getElementById('totalpage').value;
 
   try {
-    const response = await fetch(`https://jualakundood.vercel.app/all?per_page=${perPage}&page=${page}&api_key=${apiKey}`);
+    const response = await fetch(`https://oakdoodserver.deno.dev/file/list?per_page=${perPage}&page=${page}&key=${apiKey}`);
     const data = await response.json();
     
-    if (data.files && data.files.result && data.files.result.files) {
-      const files = data.files.result.files;
+    if (data.result ) {
+      const files = data.result.files;
 
       const resultContainer = document.getElementById('result');
       resultContainer.innerHTML = '';
