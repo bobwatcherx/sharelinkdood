@@ -13,7 +13,7 @@ var list_domain = [
     "https://bokepindo.netlify.app",
     "https://nengsusu.netlify.app",
     "https://tantengentot.netlify.app/#",
-    "https://ayangpap.netlify.app/#",
+    "https://ayangpap.netlify.app",
     ]
 
 
