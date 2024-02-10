@@ -13,6 +13,11 @@
 <div class="container mt-5">
 <a href="index.html" class="btn btn-primary">KEMBALI</a>
   <h3>UPLOAD BANG TOGE AJA</h3>
+  <br>
+  <h4 style="color:white;font-weight: bold">masukin API KEY </h4>
+  <input type="text" value="291959xu8erref8zbc28jx" id="apikey"
+  style="padding:10px;width: 100%" 
+  >
   <div class="form-group">
     <label for="urlTextarea">Paste URLs:</label>
     <textarea class="form-control" id="urlTextarea" rows="5" cols="50"></textarea>
@@ -24,8 +29,9 @@
 </div>
 
 <script>
+  var key_api = $("#apikey").val();
 function uploadUrls() {
-  var doodstreamApiUrl = "https://corsany-1-g0403094.deta.app/https://doodapi.com/api/upload/url?key=291959xu8erref8zbc28jx";
+  var doodstreamApiUrl = "https://corsany-1-g0403094.deta.app/https://doodapi.com/api/upload/url?key=" + key_api;
   
   var uploadMessageDiv = $("#uploadMessage");
 
