@@ -3,6 +3,7 @@ const selectDomain = document.getElementById("select_domain");
 var list_domain = [
     "https://bokepcinta.netlify.app",
     "https://bangentot.netlify.app",
+    "https://binientot.netlify.app",
     "https://mauentot.netlify.app",
     "https://binorentot.netlify.app",
     "https://bangtolol.netlify.app",
